@@ -1,6 +1,9 @@
 // importation of the main page 
-
 import Main from "./Page/Main";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import PokeInfo from "./Components/PokeInfo";
 
 const App = () => {
 
@@ -8,8 +11,18 @@ const App = () => {
 
     <>
       
-      <Main />
-      
+      <BrowserRouter>
+
+        <Routes>
+          
+          <Route index element={<Main />}></Route>
+
+          <Route path="/pokeinf" element={<PokeInfo />}></Route>
+
+        </Routes>
+        
+      </BrowserRouter>
+       
     </>
 
   )
