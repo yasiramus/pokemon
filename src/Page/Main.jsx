@@ -1,7 +1,9 @@
 // main component
-import { useEffect, useState } from "react";
+// importation of useSelector and useDispatch from react-redux liberary
+import { useSelector, useDispatch } from "react-redux";
 
-import axios from "axios";
+// import useEffect which will only activate if the values in the list change.
+import { useEffect } from "react";
 
 // importation of the card component 
 import Card from "../Components/Card";
@@ -9,55 +11,33 @@ import Card from "../Components/Card";
 // search input component 
 import SearchPokemon from "../Components/SearchPokemon";
 
+// importation of fetchPokemonRecord from the store slice folders 
+import { fetchPokemonRecord } from "../Store/Slice/PokemonSlice";
+
+import {PropagateLoader} from "react-spinners";
+
 const Main = () => {
  
-    const [pokemonData, setPokemonData] = useState([]);
+    // useSelector is a hook to access the redux store's state(data)
+    const records = useSelector((state) => state.recordsOfPokemon);
 
-    const [loading, setLoading] = useState(true);
+    // useDispatch been set here 
+    const dispatch = useDispatch();
 
-    const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
-
-    
-    const pokemonDatas = async () => {
-    
-        setLoading(true);
-
-        const PokemonDataResult = await axios.get(url);
-
-        // console.log(PokemonDataResult.data.results, 'hh');
-
-        getPokemonData(PokemonDataResult.data.results);
-        
-        setLoading(false);
-
-    };
-
-
-        
-    const getPokemonData = async (Pokemondata) => {
-      
-        await Pokemondata.map( async (PokemonData) => {
-
-            const result = await axios.get(PokemonData.url);
-
-            
-            setPokemonData(state => {
-                
-                state = [...state, result.data];
-                
-                return state;
-
-            })            
-
-        }) 
-
-    };
-
+   // useEffect been used here 
     useEffect(() => {
 
-        pokemonDatas();
+        // dispatch is been used here to dispatch an action 
+        dispatch(fetchPokemonRecord());
+       
+        // passing a dependency array to the useEffect to only render when changes occurs within the store state 
+    }, [dispatch]);
 
-    },[url]);
+    const override = {
+
+        margin: "0 auto"
+
+    };
 
     return (
       
@@ -77,16 +57,26 @@ const Main = () => {
                     
                     <SearchPokemon />
                     
-                    <div className="mt-8">
-
-                        <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">
-
-                            <Card pokemon={pokemonData} loading={loading} />
-
-                        </div>    
-
-                    </div>   
+                    {
+                        records.loading ? (<PropagateLoader color="#36d7b7" cssOverride={override} size={50}/>):
                     
+                           ( <div className="mt-8">
+
+                                <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">
+
+                                    {records.pokemonRecord.map((data, index) => {
+                                   
+                                        return <Card pokemonDetails={data} key={index} />
+                                  
+                                    })}
+
+                                </div>
+
+                            </div>
+                        ) 
+                        
+                    }
+
                 </main>
 
             </div>

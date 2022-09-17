@@ -1,50 +1,50 @@
 // card component
 
-import {PropagateLoader} from "react-spinners";
+import axios from "axios";
 
-const override = {
-    
-    margin: "auto",
+import { useEffect, useState } from "react";
 
-  };
+import { Link } from "react-router-dom";
 
-const Card = ({pokemon, loading}) => {
-    
+const Card = ({pokemonDetails}) => {
+
+    // image state 
+    const [getPokemonImage, setGetPokemonImage] = useState("");
+
+    // useffect for displaying of image 
+    useEffect(() => {
+
+        const fetchImg = async () => {
+            
+            const getPokemonData = await axios.get(pokemonDetails.url);
+            
+            const { data } = getPokemonData;
+            
+            setGetPokemonImage(data.sprites.back_default);
+
+        }
+
+        fetchImg();
+
+    },[pokemonDetails]);
+  
+
     return (
       
         <>
-            
-            {
-                loading === false ? ( 
 
-                    // <div className="flex m-auto w-2/4 justify-center items-center" >
+            <Link to="/pokeinf">
 
-                        <PropagateLoader color="#36d7b7" cssOverride={override} size={70}/>
-                        
-                    // </div>    
-                ) : (
+                <div className="rounded shadow-white shadow-md bg-red-500 w-full flex justify-center items-center gap-4 md:gap-2 p-4 md:px-5 md:m-auto m-auto">
 
-                    pokemon.splice( 0, 16 ).map( ( item, index ) => {
+                    <img src={getPokemonImage}  alt="specie pic" className="w-2/4  md:w-2/5" />
 
-                        return (
-                
-                            <a href="#" key={index}>
-                
-                                <div className="rounded shadow-black shadow-lg bg-sky-500/100 w-full flex justify-center items-center gap-4 md:gap-2 p-4 md:px-5 md:m-auto m-auto">
-                
-                                    <img src={item.sprites.front_default} alt="specie pic" className="w-2/4  md:w-2/5"/>
-                
-                                     <h1 className="md:text-sm text-base1 font-medium tracking-tight text-black capitalize">{item.name}</h1>
-                
-                                </div>
-                
-                            </a>
-                            
-                        )
-                        
-                    } )
-                )
-            }
+                    <h1 className="md:text-sm text-base1 font-medium tracking-tight text-white capitalize">{ pokemonDetails.name}</h1>
+
+                </div>
+
+            </Link>
+
             
         </>
         
