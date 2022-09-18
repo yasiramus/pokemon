@@ -1,13 +1,9 @@
 // pokeInfo componen
 
 // importation of useSelector and useDispatch from react-redux liberary
-import { useEffect } from "react";
-
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { PropagateLoader } from "react-spinners";
-
-import { fetchSinglePokemonRecord } from "../Store/Slice/PokemonSlice";
 
 import { Link } from "react-router-dom";
 
@@ -15,11 +11,12 @@ import 'animate.css';
 
 const PokeInfo = () => {
 
-    const dispatch = useDispatch();
-
     const override = {
 
-        margin: "0 auto"
+        margin: "0 auto",
+        display: "flex",
+        justifyContent: "center",
+        padding:"5rem 0"
 
     };
 
@@ -28,28 +25,22 @@ const PokeInfo = () => {
 
     // single pokemon data 
     const getPokemonDetails = useSelector((state) => state.recordsOfPokemon.singlePokemonRecord);
-
-    // console.log(getPokemonDetails,'ttt')
-        //useEffect been used here 
-        useEffect(() => {
-
-            // dispatch is been used here to dispatch an action 
-            dispatch(fetchSinglePokemonRecord(getPokemonDetails));
-           
-            // passing a dependency array to the useEffect to only render when changes occurs within the store state 
-        }, [dispatch]);
     
     return (
       
         <div className="container mx-auto p-5 md:container md:mx-auto animate__animated animate__backInDown">
 
-            <Link to="/" className="my-2.5 md:text-sm text-base1 font-medium tracking-tight text-blacl capitalize text-left">Back Home</Link>
+                <div className="mb-2">
+                    
+                    <Link to="/" className="md:text-sm text-base1 font-medium tracking-tight text-blacl capitalize text-left">Back Home</Link>
+                    
+                </div>
             
             {
                 
-                getLoading ? (<PropagateLoader color="#36d7b7" cssOverride={override} size={50}/>) : (
+                getLoading ? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50}/>) : (
                     
-                    <div className="w-2/4 md:w-full  md:m-auto m-auto p-4 bg-red-500 rounded-lg flex flex-col items-center ">
+                <div className="w-2/4 md:w-full md:m-auto m-auto p-4 bg-red-500 rounded-lg flex flex-col items-center ">
             
                     {/* species type  section*/}
                     <div className="my-5 mx-auto">
@@ -129,7 +120,7 @@ const PokeInfo = () => {
     
                             <h3 className="text-white text-xl font-normarl my-1">Weight</h3>
     
-                            <span className="text-white lowercase">{getPokemonDetails?.weight + " " + "lbs"}</span>
+                            <span className="text-white lowercase">{getPokemonDetails?.weight}<span>lbs</span></span>
     
                         </div>
     
@@ -159,7 +150,7 @@ const PokeInfo = () => {
     
                     </div>
     
-                    </div>
+                </div>
                     
                 )
            }

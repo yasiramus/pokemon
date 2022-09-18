@@ -15,6 +15,7 @@ import {  useDispatch } from "react-redux";
 
 const Card = ({pokemonDetails}) => {
 
+    // console.log(pokemonDetails);
     const dispatch = useDispatch();
 
     const history = useNavigate();
