@@ -14,7 +14,7 @@ import SearchPokemon from "../Components/SearchPokemon";
 // importation of fetchPokemonRecord from the store slice folders 
 import { fetchPokemonRecord } from "../Store/Slice/PokemonSlice";
 
-import {PropagateLoader} from "react-spinners";
+import { PropagateLoader } from "react-spinners";
 
 const Main = () => {
  
@@ -24,7 +24,7 @@ const Main = () => {
     // useDispatch been set here 
     const dispatch = useDispatch();
 
-   // useEffect been used here 
+    //useEffect been used here 
     useEffect(() => {
 
         // dispatch is been used here to dispatch an action 
@@ -60,19 +60,29 @@ const Main = () => {
                     {
                         records.loading ? (<PropagateLoader color="#36d7b7" cssOverride={override} size={50}/>):
                     
-                           ( <div className="mt-8">
+                            (<>
+                                <div className="mt-8">
 
-                                <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">
+                                    <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">
 
-                                    {records.pokemonRecord.map((data, index) => {
-                                   
-                                        return <Card pokemonDetails={data} key={index} />
-                                  
-                                    })}
+                                        {records.pokemonRecord.slice(0,16).map((data, index) => {
+                                    
+                                            return <Card pokemonDetails={data} key={index}/>
+                                    
+                                        })}
+
+                                    </div>
 
                                 </div>
+                                    
+                                <div className="flex md:gap-4 flex-row w-1/3 justify-around align-center mx-auto my-5 pt-10">
 
-                            </div>
+                                    <button className="px-6 py-2  border-2 border-red-700 rounded hover:bg-red-700 hover:text-white shadow-md hover:transition-colors">Previous</button>
+
+                                    <button className="px-6 py-2  border-2 border-red-700 rounded hover:bg-red-700 hover:text-white shadow-md hover:transition-colors">Next</button>
+
+                                </div>
+                            </>    
                         ) 
                         
                     }
