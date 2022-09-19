@@ -8,14 +8,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // fetching pokemon record thunk get request
-export const fetchPokemonRecord = createAsyncThunk("pokemon/fetchingPokemon", async () => {
+export const fetchPokemonRecord = createAsyncThunk("pokemon/fetchingPokemon", async (url) => {
 
+    // const response = await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=16");
 
-    const response = await axios.get("https://pokeapi.co/api/v2/pokemon/");
+    const response = await axios.get(url);
     
     const { data } = response;
-
-    return data.results;
+    
+    return data;
 
 });
 
@@ -46,7 +47,7 @@ const pokemonSlice = createSlice({
     //this represent the state 
     initialState: {
 
-        pokemonRecord: [],
+        pokemonRecord: {},
 
         singlePokemonRecord: {},
 
@@ -72,13 +73,12 @@ const pokemonSlice = createSlice({
 
             }) 
                 
-
             // rejected state 
             .addCase(fetchPokemonRecord.rejected, (state, action) => {
 
                 state.loading = false;
 
-                state.pokemonRecord = [];
+                state.pokemonRecord = {};
 
                 state.error = action.error.message;
 
@@ -93,7 +93,7 @@ const pokemonSlice = createSlice({
             .addCase(fetchSinglePokemonRecord.fulfilled, (state, action) => {
     
                 state.loading = false;
-                    console.log(action,"action")
+                
                 state.singlePokemonRecord = action.payload;
     
             }) 
@@ -104,7 +104,7 @@ const pokemonSlice = createSlice({
     
                 state.loading = false;
     
-                state.singlePokemonRecord = [];
+                state.singlePokemonRecord = {};
     
                 state.error = action.error.message;
     
