@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 // import { singlePokemonData } from "../Helper/singlePokemonData";
 import { fetchSinglePokemonRecord } from "../Store/Slice/PokemonSlice";
@@ -15,7 +15,6 @@ import {  useDispatch } from "react-redux";
 
 const Card = ({pokemonDetails}) => {
 
-    // console.log(pokemonDetails);
     const dispatch = useDispatch();
 
     const history = useNavigate();
@@ -23,6 +22,7 @@ const Card = ({pokemonDetails}) => {
     // image state 
     const [getPokemonImage, setGetPokemonImage] = useState("");
 
+    const [name, setGetPokemonName] = useState("");
 
     // useffect for displaying of image 
     useEffect(() => {
@@ -35,6 +35,8 @@ const Card = ({pokemonDetails}) => {
             
             setGetPokemonImage(data.sprites.back_default);
 
+            setGetPokemonName(data);
+
         }
 
         fetchImg();
@@ -43,29 +45,32 @@ const Card = ({pokemonDetails}) => {
   
        //useEffect been used here
     
-    const fetchpokemon = () => {
+    // const fetchpokemon = () => {
 
-        dispatch(fetchSinglePokemonRecord(pokemonDetails));
+    //     dispatch(fetchSinglePokemonRecord(pokemonDetails));
 
-        history('/poke')
+    //     history(`/pokemon/${pokemonDetails.name}`)
 
-    }
+    // }
+    
 
     return (
       
         <>
 
-            <div onClick={() => fetchpokemon() } className="cursor-pointer hover:transition-all animate__animated animate__backInLeft">
+            {/* <div onClick={() => fetchpokemon() }className="cursor-pointer hover:transition-all animate__animated animate__backInLeft"> */}
+
+            <Link to={`/pokemon/${name.name}`} className="cursor-pointer hover:transition-all animate__animated animate__backInLeft">
 
                 <div className="rounded shadow-white shadow-md bg-red-500 hover:bg-red-600 w-full flex justify-center items-center gap-4 md:gap-2 p-4 md:px-5 md:m-auto m-auto">
-
+                        
                     <img src={getPokemonImage}  alt="specie pic" className="w-2/4  md:w-2/5" />
 
                     <h1 className="md:text-sm text-base1 font-medium tracking-tight text-white capitalize">{ pokemonDetails.name}</h1>
 
                 </div>
-
-            </div>
+            </Link>
+            {/* </div> */}
 
             
         </>

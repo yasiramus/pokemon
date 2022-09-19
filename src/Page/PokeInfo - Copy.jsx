@@ -1,105 +1,53 @@
 // pokeInfo componen
 
+import axios from "axios";
+
 // importation of useSelector and useDispatch from react-redux liberary
 import { useDispatch, useSelector } from "react-redux";
 
-import { PropagateLoader } from "react-spinners";
+import { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
 
+import { PropagateLoader } from "react-spinners";
+
 import 'animate.css';
-import { fetchPokemonRecord } from "../Store/Slice/PokemonSlice";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
-const PokeInfo = ({detailed}) => {
+const PokeInfo = () => {
 
-    const dispatch = useDispatch();
-    // console.log(detailed.results);
+    const [detailedData, setDetailed] = useState();
+    
+    let {name} = useParams();
 
-    const endPoint = "https://pokeapi.co/api/v2/pokemon/?limit=16";
-    //useEffect been used here
-  
+    //loading state 
+    const getLoading = useSelector((state) => state.recordsOfPokemon.loading);
 
-    const b = () => {
-
-        const arr = detailed.results;
-
-    // console.log(arr.length);
-
-        const result = [];
-
-        // for (let index = 0; index < arr.length; index++) {
-        //     const element = array[index];
-            
-        // }
-
-
-    }
-
-b()
-    const datas = () => {
-
-        if (detailed.results) {
-            
-            console.log(detailed.results.name);
-            // const getName = (name) => {
-        
-            //     const dat = detailed.results.find(data => data.name === name)
-
-            //     console.log(dat, 'dat');
-            // } 
-            
-            // getName();
-        } else {
-            
-           console.log("no data was found");
-                
-        };
-        
-    }
-
-    datas()
-
+    const getLoadingd = useSelector((state) => state.recordsOfPokemon.pokemonRecord.results?.find(data => data?.name === name));
+    
     useEffect(() => {
 
-        // dispatch is been used here to dispatch an action 
-        dispatch(fetchPokemonRecord(endPoint));
-       
-        // passing a dependency array to the useEffect to only render when changes occurs within the store state 
-    }, [dispatch]);
-
-    const {id} = useParams();
-
-    const [getAllData, setPokemonData] = useState();
-
-    // const getName = (name) => {
-        
-    //     return detailed?.find(data => data.name === name);
-    // };
-
-    // const oneData = getName('pidgey')
-
-    // console.log(oneData?.join("")?.name)
-    
-    const getData = async() => {
-        
-        try {
-          
-            const justOne = await axios.get('knhgj');
-
-            const { data } = justOne;
-
-            console.log(data);
-            setPokemonData(data);
+        const fetchData = async () => {
             
-        } catch (error) {
-            console.log(error.message);
-      }
-    }
+            try {
+                
+                let url = getLoadingd.url;
 
-    // getData();
-// console.log(getAllData);
+                const getPokemonData = await axios.get(url);
+        
+                const { data } = getPokemonData;
+            
+                setDetailed(data);
+                
+            } catch (error) {
+
+                console.log(error.message);
+            }
+    
+        }
+    
+        fetchData();
+
+    }, [getLoadingd])
     
     const override = {
 
@@ -109,9 +57,12 @@ b()
         padding:"5rem 0"
 
     };
-    
-    const getPokemonDetails = useSelector((state) => state.recordsOfPokemon.singlePokemonRecord);
 
+    // const getPokemonDetails = useSelector((state) => state.recordsOfPokemon.singlePokemonRecord);
+
+    // single pokemon data
+    // const getPokemonDetails = useSelector((state) => state.recordsOfPokemon.singlePokemonRecord.find(data => data.name === name ))
+    
     return (
       
         <div className="container mx-auto p-5 md:container md:mx-auto animate__animated animate__backInDown">
@@ -122,18 +73,20 @@ b()
                     
                 </div>
             
-            {/* { */}
+            {
                 
-                {/* // getLoading ? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50}/>) : ( */}
+                getLoading ? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50}/>) : (
                     
                 <div className="w-2/4 md:w-full md:m-auto m-auto p-4 bg-red-500 rounded-lg flex flex-col items-center ">
             
                     {/* species type  section*/}
                     <div className="my-5 mx-auto">
     
-                        <img src={getPokemonDetails?.sprites?.back_default} alt="specie pic" className="md:w-2/5 m-auto" />
+                        {/* <img src={getPokemonDetails.sprites.back_default} alt="specie pic" className="md:w-2/5 m-auto" /> */}
                         
-                        <h3 className=" mt-2.5 md:text-sm text-base1 font-medium tracking-tight text-white capitalize text-center">{getPokemonDetails?.name}</h3>
+                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${detailedData?.id}.svg`} alt="specie pic" className="md:w-2/5 m-auto" />
+                            
+                        <h3 className=" mt-2.5 md:text-sm text-base1 font-medium tracking-tight text-white capitalize text-center">{detailedData?.name}</h3>
                     </div>
     
                     {/* content section  */}
@@ -144,7 +97,7 @@ b()
     
                             <h2 className="text-white text-xl font-normarl">Species</h2>
     
-                            <p className="text-white text-lg font-extralight mt-2">{getPokemonDetails?.species?.name}</p>
+                            <p className="text-white text-lg font-extralight mt-2">{detailedData?.species?.name}</p>
     
                         </div>
     
@@ -156,7 +109,7 @@ b()
                             <div className="grid grid-cols-3 gap-4 my-2">
     
                                 {
-                                    getPokemonDetails?.stats?.map((value, index) => {
+                                    detailedData?.stats?.map((value, index) => {
     
                                         return (<div className="bg-gray-200 rounded-lg py-1 px-2 text-center" key={index}>
     
@@ -181,7 +134,7 @@ b()
                             <div className="flex gap-2 flex-wrap my-2  text-center">
                                 
                                 {
-                                    getPokemonDetails?.types?.map((value, index) => {
+                                    detailedData?.types?.map((value, index) => {
     
                                         return (
                                            
@@ -204,7 +157,7 @@ b()
     
                             <h3 className="text-white text-xl font-normarl my-1">Weight</h3>
     
-                            <span className="text-white lowercase">{getPokemonDetails?.weight}<span>lbs</span></span>
+                            <span className="text-white lowercase">{detailedData?.weight}<span>lbs</span></span>
     
                         </div>
     
@@ -215,7 +168,7 @@ b()
                             <div className="flex my-2 gap-2 flex-wrap">
                                 {
                                     
-                                    getPokemonDetails?.moves?.slice(0,20).map((value, index) => {
+                                    detailedData?.moves?.slice(0,20).map((value, index) => {
                             
                                         return (
                             
@@ -236,8 +189,8 @@ b()
     
                 </div>
                     
-                {/* )
-           } */}
+                )
+           }
                 
         </div>
         
