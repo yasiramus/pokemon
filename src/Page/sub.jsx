@@ -1,18 +1,40 @@
+// main component
+// importation of useSelector and useDispatch from react-redux liberary
+import { useSelector, useDispatch } from "react-redux";
+
+// import useEffect which will only activate if the values in the list change.
+import { useEffect } from "react";
+
 // importation of the card component 
 import Card from "../Components/Card";
 
 // search input component 
 import SearchPokemon from "../Components/SearchPokemon";
 
-// importation of spinner 
-import { PropagateLoader } from "react-spinners";
+// importation of fetchPokemonRecord from the store slice folders 
+import { fetchPokemonRecord } from "../Store/Slice/PokemonSlice";
 
-// imporation of pagination component 
+import { PropagateLoader } from "react-spinners";
 import Pagination from "../Pagination/Pagination";
 
-// main component
-const Main = ({pokemons, loader, nextData, prevData }) => {
+const Main = () => {
+
+    // useSelector is a hook to access the redux store's state(data)
+    const records = useSelector((state) => state.recordsOfPokemon);
     
+    // useDispatch been set here 
+    const dispatch = useDispatch();
+
+    // const endPoint = "https://pokeapi.co/api/v2/pokemon/?limit=16";
+    // //useEffect been used here 
+    // useEffect(() => {
+
+    //     // dispatch is been used here to dispatch an action 
+    //     dispatch(fetchPokemonRecord(endPoint));
+       
+    //     // passing a dependency array to the useEffect to only render when changes occurs within the store state 
+    // }, [dispatch]);
+
     const override = {
 
         margin: "0 auto",
@@ -38,17 +60,17 @@ const Main = ({pokemons, loader, nextData, prevData }) => {
                         
                     </div>
                     
-                    <SearchPokemon searchPokemons = {pokemons}/>
+                    <SearchPokemon searchPokemons = {records.pokemonRecord}/>
                     
                     {
-                       loader ? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50}/>):
+                        records.loading ? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50}/>):
                     
                             (<>
                                 <div className="mt-8">
 
                                     <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">
 
-                                        {pokemons?.map((data, index) => {
+                                        {records?.pokemonRecord?.results?.map((data, index) => {
                                     
                                             return <Card pokemonDetails={data} key={index}/>
                                     
@@ -58,7 +80,7 @@ const Main = ({pokemons, loader, nextData, prevData }) => {
 
                                 </div>
                                     
-                                <Pagination nextPage={nextData} prevPage={prevData} />       
+                                <Pagination changePage={records.pokemonRecord} />       
                             </>    
                         ) 
                         

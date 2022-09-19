@@ -69,7 +69,13 @@ const pokemonSlice = createSlice({
 
                 state.loading = false;
 
+                // console.log(action.payload.results.map(data => data.name), action);
                 state.pokemonRecord = action.payload;
+
+                // const data = action.payload.results.map(data => data)
+
+                // state.pokemonRecord = {...data};
+               
 
             }) 
                 
@@ -78,7 +84,7 @@ const pokemonSlice = createSlice({
 
                 state.loading = false;
 
-                state.pokemonRecord = {};
+                state.pokemonRecord = [];
 
                 state.error = action.error.message;
 
