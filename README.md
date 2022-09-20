@@ -6,17 +6,12 @@
 
 ## Stacks Used
 
-<p> <strong> ReactJs: </strong> for creating of the entire application.<p>
-
-> redux-toolkit : for state management.
-
-> react-redux : for binding that is connecting the redux-store to the react app.
-
-> tailwind.css : for styling.
-
-> react-router-dom : for routing.
-
-> axios : for making of api calls.
+<p><strong> ReactJs: </strong> for creating of the entire application.<br>
+redux-toolkit : for state management. <br>
+react-redux : for binding that is connecting the redux-store to the react app.<br>
+tailwind.css : for styling.<br>
+react-router-dom : for routing.<br>
+axios : for making of api calls.<p>
 
 <!-- ### 🏠 [Homepage](https://github.com/yasiramus/pokemon.git) -->
 ### 🏠 [Homepage](App)
