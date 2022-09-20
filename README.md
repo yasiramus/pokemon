@@ -1,8 +1,10 @@
-<h1 align="center">Welcome to Pokemon 👋</h1>
+<h1 align="center">Welcome to Pokemon Monsters 👋</h1>
 
-## Description
+## 📝 Description
 
-> The application allows users to discover and browse through all avalable pokemons, and also discover other feauters of each pokemons 
+> The application allows users to discover and browse through all avalable pokemons
+
+> also discover other feauters of each pokemons.
 
 <!-- ### 🏠 [Homepage](https://github.com/yasiramus/pokemon.git) -->
 ### 🏠 [Homepage](App)
@@ -52,7 +54,5 @@ Contributions, issues and feature requests are welcome!
 ## Show your support
 
 Give a ⭐️ if this project if you love  it!
-
-<!-- ## 📝 License -->
 
 Copyright © 2022 [Yasira Musah](https://github.com/yasiramus).
