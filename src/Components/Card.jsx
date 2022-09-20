@@ -22,6 +22,8 @@ const Card = ({pokemonDetails}) => {
     // image state 
     const [getPokemonImage, setGetPokemonImage] = useState("");
 
+    const [getPokemon, setGetPokemon] = useState("");
+
     //useffect for displaying of image 
     useEffect(() => {
 
@@ -34,6 +36,7 @@ const Card = ({pokemonDetails}) => {
             // access to pokemon data 
             const { data } = getPokemonData;
             
+            setGetPokemon(data.name)
             // access to image 
             setGetPokemonImage(data.sprites.back_default);
 
@@ -55,7 +58,7 @@ const Card = ({pokemonDetails}) => {
         <>
             {/* <div onClick={() => fetchpokemon() }className="cursor-pointer hover:transition-all animate__animated animate__backInLeft"> */}
 
-            <Link to={`/pokemon/${pokemonDetails.name}`} className="cursor-pointer hover:transition-all animate__animated animate__backInLeft">
+            <Link to={`/pokemon/${getPokemon}`} className="cursor-pointer hover:transition-all animate__animated animate__backInLeft">
 
                 <div className="rounded shadow-white shadow-md bg-red-500 hover:bg-red-600 w-full flex justify-center items-center gap-4 md:gap-2  sm:gap-1 p-4 md:px-5 md:m-auto m-auto">
                         

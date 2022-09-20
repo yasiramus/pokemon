@@ -46,7 +46,7 @@ const PokeInfo = () => {
             
             try {
                 
-                let Url = getPokemonData.url;
+                let Url = getPokemonData?.url;
 
                 // api call for get individual data 
                 const getSinglePokemonData = await axios.get(Url);
