@@ -14,7 +14,7 @@
 
 > The application allows users to discover and browse through all avalable pokemons, and also discover other feauters of each pokemons 
 
-### 🏠 [Homepage](index.jsx)
+### 🏠 [Homepage](https://github.com/yasiramus/pokemon.git)
 
 ### ✨ [Demo](http://pokemon-eta-black.vercel.app/)
 
@@ -53,6 +53,6 @@ Contributions, issues and feature requests are welcome!
 
 Give a ⭐️ if this project if you love  it!
 
-## 📝 License
+<!-- ## 📝 License -->
 
 Copyright © 2022 [Yasira Musah](https://github.com/yasiramus).
