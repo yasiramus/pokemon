@@ -11,8 +11,10 @@ import { PropagateLoader } from "react-spinners";
 import Pagination from "../Pagination/Pagination";
 
 // main component
-const Main = ({pokemons, loader, nextData, prevData }) => {
+//destructer pokemons, loader, nextData, prevData, pokeError passed them as props from the App component which is the parent component of the Main page
+const Main = ({pokemons, loader, nextData, prevData, pokeError}) => {
     
+    //override the default spinner css 
     const override = {
 
         margin: "0 auto",
@@ -38,29 +40,34 @@ const Main = ({pokemons, loader, nextData, prevData }) => {
                         
                     </div>
                     
+                    {/* search component  */}
+                    {/* pokemons passed down to search as props  */}
                     <SearchPokemon searchPokemons = {pokemons}/>
                     
                     {
-                       loader ? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50}/>):
+                       pokeError ? (<h2>pokeError.message</h2>) : loader ? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50}/>):
                     
-                            (<>
-                                <div className="mt-8">
+                       (<>
+                           <div className="mt-8">
 
-                                    <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">
+                                <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">
 
-                                        {pokemons?.map((data, index) => {
-                                    
-                                            return <Card pokemonDetails={data} key={index}/>
-                                    
-                                        })}
+                                    {/* looping through the pokemons data  */}
+                                    {pokemons?.map((data, index) => {
 
-                                    </div>
+                                      // data passed down to card component as props
+                                      return (<Card pokemonDetails={data} key={index}/>)
+                               
+                                    })}
 
                                 </div>
-                                    
-                                <Pagination nextPage={nextData} prevPage={prevData} />       
-                            </>    
-                        ) 
+
+                           </div>
+                               
+                            {/* Pagination component  which contains the button for next and previous*/}
+                            {/* nextData and prevData passed down to Pagination as props  */}     
+                           <Pagination nextPage={nextData} prevPage={prevData} />       
+                       </>)   
                         
                     }
 
