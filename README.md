@@ -6,7 +6,7 @@
 
 ## Stacks Used
 
-# ReactJs : for creating of the entire application.
+<p> <strong> ReactJs: </strong> for creating of the entire application.<p>
 
 > redux-toolkit : for state management.
 
