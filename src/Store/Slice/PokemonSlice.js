@@ -2,9 +2,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // current is imported and used when you want to console.log the state 
-// you call rhe current as a func and pass the state to it 
+// you call the current as a func and pass the state to it 
 
-// importation of axios for crud operations 
+// importation of axios for performing of api call  
 import axios from "axios";
 
 // fetching pokemon record thunk get request
@@ -12,27 +12,31 @@ export const fetchPokemonRecord = createAsyncThunk("pokemon/fetchingPokemon", as
 
     // const response = await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=16");
 
+    // the url will passed to the fetchPokemonRecord in the root component which is app
     const response = await axios.get(url);
     
+    // this returns an object containing the result, next, previous and count 
     const { data } = response;
     
+    // return all data 
     return data;
 
 });
 
-// / get single pokemon record thunk get request
-export const fetchSinglePokemonRecord = createAsyncThunk("pokemon/singlePokemon", async (pokemonData) => {
+//get single pokemon record thunk get request
+// export const fetchSinglePokemonRecord = createAsyncThunk("pokemon/singlePokemon", async (pokemonData) => {
 
-    // the parameter her is an object 
-    const response = await axios.get(pokemonData.url);
+//     // the parameter here is an object 
+//     const response = await axios.get(pokemonData.url);
     
-    const { data } = response;
+//     // this will return and object containing individual data 
+//     const { data } = response;
 
-    return data;
+//     return data;
 
-});
+// });
 
-// action type is the combination of both the name and action creator which is "record/addNewStudent"
+// action type is the combination of both the name and action creator which is "pokemon/pokemonRecord"
 
 // createSlice is a function that accepts an initial state, an object full of reducer functions, and a "slice name", and 
 // automatically generates action creators and action types that correspond to the reducers and state.
@@ -49,22 +53,24 @@ const pokemonSlice = createSlice({
 
         pokemonRecord: {},
 
-        singlePokemonRecord: {},
+        // singlePokemonRecord: {},
 
-        loading: false,
+        loading: true,
 
         error: ""
         
     },
 
-    // the extra reducers communicate with the thunk, they work together, the other cant be used without the other 
+    //the extra reducers communicate with the thunk, they work together, the other cant be used without the other 
     extraReducers: builder => {
         
-        // fetching of spokemon data begins from here
+        // fetching of pokemon data begins from here
         // pending state 
+        // at the pending state loading is true that is when the data is still being fetched 
         builder.addCase(fetchPokemonRecord.pending, state => { state.loading = true })
         
-            // fulfilled state 
+            //fulfilled state 
+            //when fulfilled loading state changes to false that is when the data has been fatched 
             .addCase(fetchPokemonRecord.fulfilled, (state, action) => {
 
                 state.loading = false;
@@ -80,12 +86,15 @@ const pokemonSlice = createSlice({
             }) 
                 
             // rejected state 
+            // when rejected the loading state is false this beause there is an error no data is being fetched or has been fetched 
             .addCase(fetchPokemonRecord.rejected, (state, action) => {
 
                 state.loading = false;
 
-                state.pokemonRecord = [];
+                // at the rejected state pokemon record will be set to an empty object 
+                state.pokemonRecord = {};
 
+                // at the rejected state it should set the error message 
                 state.error = action.error.message;
 
             })
@@ -93,35 +102,32 @@ const pokemonSlice = createSlice({
 
              // fetch single data 
             // pending state 
-            .addCase(fetchSinglePokemonRecord.pending, state => { state.loading = true })
+            // .addCase(fetchSinglePokemonRecord.pending, state => { state.loading = true })
         
-            // fulfilled state 
-            .addCase(fetchSinglePokemonRecord.fulfilled, (state, action) => {
+            // // fulfilled state 
+            // .addCase(fetchSinglePokemonRecord.fulfilled, (state, action) => {
     
-                state.loading = false;
+            //     state.loading = false;
                 
-                state.singlePokemonRecord = action.payload;
+            //     state.singlePokemonRecord = action.payload;
     
-            }) 
+            // }) 
                     
     
             // rejected state 
-            .addCase(fetchSinglePokemonRecord.rejected, (state, action) => {
+            // .addCase(fetchSinglePokemonRecord.rejected, (state, action) => {
     
-                state.loading = false;
+            //     state.loading = false;
     
-                state.singlePokemonRecord = {};
+            //     state.singlePokemonRecord = {};
     
-                state.error = action.error.message;
+            //     state.error = action.error.message;
     
-            })
+            // })
             // fetching of pokemon data ends here
     }
     
 });
-
-// when the pokemonSlice is log it output {name: 'record', actions: {…}, caseReducers: {…}, reducer: ƒ, getInitialState: ƒ}
-// without the extraReducers
 
 // exportation of reducer
 export default pokemonSlice.reducer;
