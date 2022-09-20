@@ -15,15 +15,17 @@
 ## Install
 
 <p>will install all the packages used for this project</p>
+
 ```sh
 npm install
 ```
 
 ## Usage
 
-<p>Runs the app in the development mode. Open http://localhost:3000 to view it in your browser. 
-  The page will reload when you make changes. You may also see any lint errors in the console.</p>
-  
+<p>Runs the app in the development mode. Open <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> 
+  The page will reload when you make changes. You may also see any lint errors in the console.
+</p>
+
 ```sh
 npm start
 ```
