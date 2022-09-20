@@ -2,9 +2,15 @@
 
 ## 📝 Description
 
-> The application allows users to discover and browse through all avalable pokemons
+> The application allows users to discover and browse through all avalable pokemons and also discover other feauters of each pokemons
 
-> also discover other feauters of each pokemons.
+## Stacks Used
+> ReactJs : for creating of the entire application
+> redux-toolkit : for state management
+> react-redux : for binding that is connecting the redux-store to the react app
+> tailwind.css : for styling 
+> react-router-dom : for routing
+> axios : for making of api calls
 
 <!-- ### 🏠 [Homepage](https://github.com/yasiramus/pokemon.git) -->
 ### 🏠 [Homepage](App)
