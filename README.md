@@ -2,16 +2,16 @@
 
 ## 📝 Description
 
-> The application allows users to discover and browse through all avalable pokemons and also discover other feauters of each pokemons
+  > The application allows users to discover and browse through all avalable pokemons and also discover other feauters of each pokemons
 
 ## Stacks Used
 
-<p><strong> ReactJs: </strong> for creating of the entire application.<br>
-redux-toolkit : for state management. <br>
-react-redux : for binding that is connecting the redux-store to the react app.<br>
-tailwind.css : for styling.<br>
-react-router-dom : for routing.<br>
-axios : for making of api calls.<p>
+ * <strong> ReactJs: </strong> for creating of the entire application.
+ * redux-toolkit : for state management. 
+ * react-redux : for binding that is connecting the redux-store to the react app.
+ * tailwind.css : for styling.
+ * react-router-dom : for routing.
+ * axios : for making of api calls.
 
 <!-- ### 🏠 [Homepage](https://github.com/yasiramus/pokemon.git) -->
 ### 🏠 [Homepage](App)
@@ -31,9 +31,9 @@ npm install
 
 ## Usage
 
-<p>Runs the app in the development mode. Open <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> 
-  The page will reload when you make changes. You may also see any lint errors in the console.
-</p>
+  <p>Runs the app in the development mode. Open <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> 
+    The page will reload when you make changes. You may also see any lint errors in the console.
+  </p>
 
 ```sh
 npm start
@@ -49,7 +49,6 @@ npm test
 
 👤 **Yasira Musah**
 
-* Website: ''
 * Twitter: [@HajjiaYasira](https://twitter.com/HajjiaYasira)
 * Github: [@yasiramus](https://github.com/yasiramus)
 * LinkedIn: [@yasiramusah](https://linkedin.com/in/yasiramusah)
