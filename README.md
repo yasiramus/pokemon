@@ -5,7 +5,8 @@
 > The application allows users to discover and browse through all avalable pokemons and also discover other feauters of each pokemons
 
 ## Stacks Used
-> ReactJs : for creating of the entire application.
+
+## ReactJs : for creating of the entire application.
 
 > redux-toolkit : for state management.
 
