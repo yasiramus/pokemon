@@ -1,16 +1,6 @@
 <h1 align="center">Welcome to Pokemon 👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
-  <!-- <a href="''" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
-  </a> -->
-  <!-- <a href="''" target="_blank">
-    <img alt="License: ''" src="https://img.shields.io/badge/License-''-yellow.svg" />
-  </a> -->
-  <a href="https://twitter.com/HajjiaYasira" target="_blank">
-    <img alt="Twitter: HajjiaYasira" src="https://img.shields.io/twitter/follow/HajjiaYasira.svg?style=social" />
-  </a>
-</p>
+
+## Description
 
 > The application allows users to discover and browse through all avalable pokemons, and also discover other feauters of each pokemons 
 
@@ -19,14 +9,21 @@
 
 ### ✨ [Demo](http://pokemon-eta-black.vercel.app/)
 
+## Available Scripts
+<p>In the project directory, you can run:</p>
+
 ## Install
 
+<p>will install all the packages used for this project</p>
 ```sh
 npm install
 ```
 
 ## Usage
 
+<p>Runs the app in the development mode. Open http://localhost:3000 to view it in your browser. 
+  The page will reload when you make changes. You may also see any lint errors in the console.</p>
+  
 ```sh
 npm start
 ```
