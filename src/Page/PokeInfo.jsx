@@ -2,13 +2,13 @@
 import 'animate.css';
 
 //importaion axios for making of api calls 
-import axios from "axios";
+// import axios from "axios";
 
 //importation of useSelector and useDispatch from react-redux liberary
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // import useEffect which will only activate if the values in the list change and useState for handling stateful value and  func.
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 //importation of Link for redirecting to a different page , useParams for accessing the key and values for the route path
 import { Link, useParams } from "react-router-dom";
@@ -16,17 +16,18 @@ import { Link, useParams } from "react-router-dom";
 // importation of spinner from react spinners 
 import { PropagateLoader } from "react-spinners";
 
-// import { fetchPokemonRecord } from "../Store/Slice/PokemonSlice";
+import { fetchPokemonRecord } from '../Store/Slice/PokemonSlice';
 
 const PokeInfo = () => {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+        
+    //useParams returns an object of key/value that matched by the route path.
+    const {name} = useParams();
 
     // detailedData state 
-    const [detailedData, setDetailedData] = useState();
-    
-    //useParams returns an object of key/value that matched by the route path.
-    let {name} = useParams();
+    // we use this when we manually make an api call to get individual data using axios 
+    // const [detailedData, setDetailedData] = useState({});
 
     //loading state 
     const getLoading = useSelector((state) => state.recordsOfPokemon.loading);
@@ -34,38 +35,19 @@ const PokeInfo = () => {
     // err state 
     const err = useSelector((state) => state.recordsOfPokemon.error);
 
-    // getPokemonData state for finding individual data 
-    // the find method return the find data that meet the condition 
-    const getPokemonData = useSelector((state) => state.recordsOfPokemon.pokemonRecord.results?.find(data => data?.name === name));
-    
-    //useEffect Accepts a function that can return a cleanup function, possibly effectful code.
-    // and a dependency array if present, effect will only activate if the values in the list change
-    useEffect(() => {
+    // grabbing the state from the store 
+    const detailedData = useSelector((state) => state.recordsOfPokemon.pokemonRecord);
 
-        const fetchData = async () => {
-            
-            try {
-                
-                let Url = getPokemonData?.url;
+    // useEffect is been used here for dispatching of fetchPokemonRecord action 
+    useEffect( () => {
 
-                // api call for get individual data 
-                const getSinglePokemonData = await axios.get(Url);
+        // this works in the same manner as fetchPokemonRecord
+        // axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then(response => setDetailedData(response.data));
+
+        // the name here as been passed as param in other to get access to individual data
+        dispatch(fetchPokemonRecord(`https://pokeapi.co/api/v2/pokemon/${name}`));
         
-                const { data } = getSinglePokemonData;
-            
-                setDetailedData(data);
-                
-            } catch (error) {
-
-                console.log(error.message);
-            }
-    
-        };
-    
-        fetchData(); //calling the fetch data func here 
-
-        // passing a dependency array to only render when changes occurs within the store state 
-    }, [getPokemonData]);
+    },[dispatch, name]);
     
     // override the default spinner css 
     const override = {
@@ -76,11 +58,6 @@ const PokeInfo = () => {
         padding:"5rem 0"
 
     };
-
-    // const getPokemonDetails = useSelector((state) => state.recordsOfPokemon.singlePokemonRecord);
-
-    // single pokemon data
-    // const getPokemonDetails = useSelector((state) => state.recordsOfPokemon.singlePokemonRecord.find(data => data.name === name ))
     
     return (
       
@@ -103,7 +80,7 @@ const PokeInfo = () => {
         
                             {/* <img src={getPokemonDetails.sprites.back_default} alt="specie pic" className="md:w-2/5 m-auto" /> */}
                             
-                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${detailedData?.id}.svg`} alt="specie pic" className="md:w-2/5 m-auto" />
+                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${detailedData?.id}.svg`} alt="specie pic" loading="lazy" className="md:w-2/5 m-auto" />
                                 
                             <h3 className=" mt-2.5 md:text-sm text-base1 font-medium tracking-tight text-white capitalize text-center">{detailedData?.name}</h3>
 

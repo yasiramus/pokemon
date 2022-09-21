@@ -1,29 +1,37 @@
-// importation of the card component 
-import Card from "../Components/Card";
+// importation of useSelector, useDispatch from react-redux for the binding 
+import { useSelector, useDispatch } from "react-redux";
+
+// import useEffect which will only activate if the values in the list change.
+import { useEffect } from "react";
+
+// importation of fetchPokemonRecord from slice folder 
+import { fetchPokemonRecord } from "../Store/Slice/PokemonSlice";
 
 // search input component 
-import SearchPokemon from "../Components/SearchPokemon";
-
-// importation of spinner 
-import { PropagateLoader } from "react-spinners";
-
-// imporation of pagination component 
-import Pagination from "../Pagination/Pagination";
+import SearchPokemon from "../Components/Search/SearchPokemon";
 
 // main component
-//destructer pokemons, loader, nextData, prevData, pokeError passed them as props from the App component which is the parent component of the Main page
-const Main = ({pokemons, loader, nextData, prevData, pokeError}) => {
+const Main = () => {
+
+    //the dispatch an action from the redux store which is the function.
+    const dispatch = useDispatch();
+
+  //useSelector is a hook give us access to the redux store's state which is the (data) and return the selected data
+  const records = useSelector((state) => state.recordsOfPokemon);
+
+  //setting of general url link here for the third party api which is the pokemon api
+  const endPoint = "https://pokeapi.co/api/v2/pokemon/?limit=16";
+
+  //useEffect Accepts a function that can return a cleanup function, possibly effectful code.
+  // and a dependency array if present, effect will only activate if the values in the list change
+  useEffect(() => {
+  
+    // dispatch is been used here to dispatch an action 
+    dispatch(fetchPokemonRecord(endPoint));
+         
+    // passing a dependency array to only render when changes occurs within the store state 
+  }, [dispatch]);
     
-    //override the default spinner css 
-    const override = {
-
-        margin: "0 auto",
-        display: "flex",
-        justifyContent: "center",
-        padding:"5rem 0"
-
-    };
-
     return (
       
         <>
@@ -42,34 +50,7 @@ const Main = ({pokemons, loader, nextData, prevData, pokeError}) => {
                     
                     {/* search component  */}
                     {/* pokemons passed down to search as props  */}
-                    <SearchPokemon searchPokemons = {pokemons}/>
-                    
-                    {
-                       pokeError ? (<h2>pokeError.message</h2>) : loader ? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50}/>):
-                    
-                       (<>
-                           <div className="mt-8">
-
-                                <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">
-
-                                    {/* looping through the pokemons data  */}
-                                    {pokemons?.map((data, index) => {
-
-                                      // data passed down to card component as props
-                                      return (<Card pokemonDetails={data} key={index}/>)
-                               
-                                    })}
-
-                                </div>
-
-                           </div>
-                               
-                            {/* Pagination component  which contains the button for next and previous*/}
-                            {/* nextData and prevData passed down to Pagination as props  */}     
-                           <Pagination nextPage={nextData} prevPage={prevData} />       
-                       </>)   
-                        
-                    }
+                    <SearchPokemon pokemons={records}/>
 
                 </main>
 
