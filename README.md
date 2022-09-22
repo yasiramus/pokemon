@@ -10,9 +10,9 @@
   * Display of individual pokemon cards
   * Redirecting to the detailed page for pokemon features
   * search for available pokemons
-  *Display search results
+  * Display search results
 
-## Content
+## Contents
 
 <P>
 
