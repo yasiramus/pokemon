@@ -20,7 +20,7 @@ const SearchPokemon = ({ pokemons }) => {
     // fetch data state 
     const [filteredData, setFilteredData] = useState([]);
 
-    const [searchOutcome, setSearchOutcome] = useState('');
+    // const [searchOutcome, setSearchOutcome] = useState('');
 
     // pokemon data for the search
     const pokemon = pokemons.pokemonRecord.results;
@@ -55,7 +55,8 @@ const SearchPokemon = ({ pokemons }) => {
 
         } else {
 
-            setSearchOutcome("sorry we don't have this particular pokemon")
+            // setSearchOutcome("sorry we don't have this particular pokemon")
+            return ("sorry we don't have this particular pokemon")
         }
 
     };
@@ -108,6 +109,7 @@ const SearchPokemon = ({ pokemons }) => {
                             <div className="flex gap-6 w-11/12 mt-15 mx-auto justify-center">
                             
                                 {
+                                    // mapping through the filtered data to return the needed data 
                                     filteredData.map((value, index) => (
 
                                         <SearchResult filteredData={value} key={index} />
