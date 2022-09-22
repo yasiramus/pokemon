@@ -20,6 +20,9 @@ const SearchPokemon = ({ pokemons }) => {
     // fetch data state 
     const [filteredData, setFilteredData] = useState([]);
 
+    const [searchOutcome, setSearchOutcome] = useState('');
+
+    // pokemon data for the search
     const pokemon = pokemons.pokemonRecord.results;
 
     const handleSearchFilter = (text) => {
@@ -27,7 +30,6 @@ const SearchPokemon = ({ pokemons }) => {
         // grabbing the input value 
         const searchWord = text.target.value;
        
-        
         setWordEntered(searchWord);
 
         // the newFilter will return an array of object containing the search result
@@ -37,7 +39,7 @@ const SearchPokemon = ({ pokemons }) => {
             return value.name.includes(searchWord.toLowerCase());
             
         });
-         
+
         // check to see if the type word exit 
         const wordPresent = newSearch.some(data => data.name);  
        
@@ -53,7 +55,7 @@ const SearchPokemon = ({ pokemons }) => {
 
         } else {
 
-            return "sorry we don't have this particular pokemon"
+            setSearchOutcome("sorry we don't have this particular pokemon")
         }
 
     };
@@ -85,19 +87,28 @@ const SearchPokemon = ({ pokemons }) => {
                 <input type="text" value={wordEntered} onChange={handleSearchFilter} autoComplete="off" placeholder="Seacrh for Pokemon" className="w-full px-3 py-3 flex-auto rounded-lg outline-0" />
                 
                 {
-                    (filteredData.length === 0) ? ( <button type="submit" className="text-gray-600 flex-none m-2.5"><i className="fa fa-search text-base1"></i></button>): 
+                    (filteredData.length === 0) ? ( <div type="submit" className="text-gray-600 flex-none m-2.5"><i className="fa fa-search text-base1"></i></div>): 
                     
                     (<button type="submit" onClick={clearInputField} className="text-gray-600 flex-none m-2.5"><i className="fa fa-times text-base1"></i></button>)
                 }
 
             </form>
 
+            {/* this contain both the search result and card component  */}
             <div className="mt-8">
 
                 {
+                  // { checking to see if the length filteredData isnt empty, if it isnt it will show the search result component else it show the card component */}
                     (filteredData.length !== 0 ) ?
                         
-                        (<div className="flex gap-4 flex-wrap w-11/12 mt-15 mx-auto">
+                        (<>
+                            
+                            <p className="text-center my-12 text-xl ffont-normal text-black capitalize">Search Results for "{wordEntered}"</p>
+                            
+                            <div className="flex gap-6 w-11/12 mt-15 mx-auto justify-center">
+                            
+                {
+                
                                 {
                                     filteredData.map((value, index) => (
 
@@ -107,13 +118,14 @@ const SearchPokemon = ({ pokemons }) => {
 
                                 }
 
-                        </div>
-
+                            </div>
+                            
+                         </>           
                     ) : (
                     <>
                                 {
-                          
-                                    pokemons.error ? (<h2>{ pokemons.error.message}</h2>) : (pokemons.loading)? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50} />) :
+                                    // if error show the error message or show the loader or the data depending on the condition met
+                                    pokemons.error ? (<h2>Oops sorry something just went wrong</h2>) : (pokemons.loading)? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50} />) :
                                         
                                         (<>
                                         <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">

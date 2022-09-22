@@ -8,7 +8,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // fetching pokemon record thunk get request
-export const fetchPokemonRecord = createAsyncThunk("pokemon/fetchingPokemon", async (url) => {
+export const fetchPokemonRecord = createAsyncThunk("pokemon/fetchPokemon", async (url) => {
 
     // const response = await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=16");
 
@@ -75,18 +75,12 @@ const pokemonSlice = createSlice({
 
                 state.loading = false;
 
-                // console.log(action.payload.results.map(data => data.name), action);
                 state.pokemonRecord = action.payload;
-
-                // const data = action.payload.results.map(data => data)
-
-                // state.pokemonRecord = {...data};
                
-
             }) 
                 
             // rejected state 
-            // when rejected the loading state is false this beause there is an error no data is being fetched or has been fetched 
+            // when rejected the loading state is false this beause there is an error and no data is being fetched or has been fetched 
             .addCase(fetchPokemonRecord.rejected, (state, action) => {
 
                 state.loading = false;
