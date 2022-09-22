@@ -45,7 +45,7 @@
  * react-spinners : for displaying of the loading spinner
 
 
-### ✨ [Demo](https://pokemon-mvtz87z1k-yasiramus.vercel.app/)
+### ✨ [Demo](https://pokemon-eta-black.vercel.app/)
 
 ## Available Scripts
 <p>In the project directory, you can run:</p>
