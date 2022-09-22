@@ -16,10 +16,12 @@ import { Link, useParams } from "react-router-dom";
 // importation of spinner from react spinners 
 import { PropagateLoader } from "react-spinners";
 
+// importation of the fetchPokemonRecord thunk from the slice folder 
 import { fetchPokemonRecord } from '../Store/Slice/PokemonSlice';
 
 const PokeInfo = () => {
 
+    // set dispatch
     const dispatch = useDispatch();
         
     //useParams returns an object of key/value that matched by the route path.
@@ -35,7 +37,7 @@ const PokeInfo = () => {
     // err state 
     const err = useSelector((state) => state.recordsOfPokemon.error);
 
-    // grabbing the state from the store 
+    // grabbing the state from the store for the pokemonRecord
     const detailedData = useSelector((state) => state.recordsOfPokemon.pokemonRecord);
 
     // useEffect is been used here for dispatching of fetchPokemonRecord action 
@@ -158,6 +160,7 @@ const PokeInfo = () => {
         
                             </div>
         
+                            {/* the moves section  */}
                             <div>
         
                                 <h2 className="text-white text-xl font-normarl">Moves</h2>

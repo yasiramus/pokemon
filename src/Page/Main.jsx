@@ -42,7 +42,7 @@ const Main = () => {
 
                     <div className="text-center py-5">
 
-                        <h4 className="text-red-700  text-tiny font-medium">Pokédex</h4>
+                        <h4 className="text-red-700  text-tiny font-medium italic">Pokédex</h4>
 
                         <p className="md:whitespace-normal text-base1 md:text-sm font-normal py-4 text-gray-700">The Pokédex contains detailed stats for every creature from the Pokemon games.</p>
                         

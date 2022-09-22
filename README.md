@@ -2,37 +2,35 @@
 
 ## 📝 Description
 
-  > The application allows users to discover and browse through all avalable pokemons and also discover other feauters of each pokemons. 
+  > A application which allow users to discover and search through all avalable pokemons with their feauters. 
 
-## Core Functionality 
+##  Core Functionality 
+
+  * Pagination  
+  * Display of individual pokemon cards
+  * Redirecting to the detailed page for pokemon features
+  * search for available pokemons
+  *Display search results
+
+## Content
 
 <P>
 
-  > I used redux-toolkit to manage the state that is the data i fetched from the pokemon api using axios, which is an object containing the count, next, previous and the result, i grab the data i need using a hook called useSelector, 
+  > redux-toolkit was used managing the state, That is the data fetched from the pokemon api using axios, which is an object containing the count, next, previous and the result, the data was grab using a hook called useSelector, 
 
-  > I now passed the data from the App which is the the entry point for Page  to main page as prop,
-  the main has the individual card the pagination and search, i passed the data from the app to main page and now passed it to individual component within the main page. 
+  > Data fwas passed from the store the main page and pokemon Info Page, the main page contains search pokemon component.
+  the was passed from the main page to search component as a prop in an destructure format in order for one to have access to the data within the search component.
   
-  > I passed the data in this format because i realized i need those data within each child component.
+  >filtered through the result data to have access to individual that after filtering check to see if those data are available, if they are return the available data which matches the type word, before returning the available data check to see if the length is less than 3 if it return those data.
 
-  > Before i passed the data to Card component i loop through the data to have access to each data after looping through i now passed to card component as prop
-  at the card component i wrap the entire card a in Link tag setting it to enpoint so that when a pokemon is clicked it redirect to the PokeInfo Page which which dispay some features such as the species name, moves, weight, types and images of the pokemon the card component only displays the name and image.
+  >map the resulted array, passed it to card compoment as prop to have access to those data with the card component, after mapping through dispay the data within the jsx
 
-  > Within the PokeInfo Detailed page i grab the data using the useSelector but i before i use UseParam to the pokemon 
-  now within the useSelector hook i use find method to get the first name that satify the condition 
-  after getting the name i now make an api call to get the data and passed them to element.
+  > Within the PokeInfo Detailed page i grab the data using the useSelector but i before i use UseParam to get the name and passed it to the fetchPokemonRecord function together with the url in a string template which will dispatch the action within the store. use useSelector to get the data and passed the to the jsx in order to render those data within the interface
 
   >At the pagination i called the fetchPokemon which contains the api call and passed the prop to it so when a button is clicke it shows the next data
   the button of the provious will only show when it has data I implement in this format because i thought it best the show the previous button only when it has data to avoid users from clicking on it when it has no data
 
-  > Search functionality 
-
 </P>
-
-<!-- ## Functionality Yet To Implement -->
-
-<!-- > I am yet to implement the search functionality, -->
- <!-- This is because i first break down the task into smaller section and started implementing the core feauters. -->
 
 ## Stacks Used
 
@@ -44,15 +42,6 @@
  * axios : for making of api calls.
  * react-spinners : for displaying of the loading spinner
 
-## Features
-
-  * Pagination  
-  * Displaying of individual pokemon cards
-  * Redirecting to the detailed page of the pokemon when a single pokemon card is clicked
-
-
-<!-- ### 🏠 [Homepage](https://github.com/yasiramus/pokemon.git) -->
-### 🏠 [Homepage](App)
 
 ### ✨ [Demo](http://pokemon-eta-black.vercel.app/)
 

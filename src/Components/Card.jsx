@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 // importation of useSelector and useDispatch from react-redux liberary
 // import {  useDispatch } from "react-redux";
 
-//destructer  pokemonDetailsand passed as props from the main component which is the parent component of the card section 
+//destructer  pokemonDetailsand passed as props from the search component which is the parent component of the card section 
 const Card = ({ pokemonDetails }) => {
     
     // const dispatch = useDispatch();
@@ -61,12 +61,12 @@ const Card = ({ pokemonDetails }) => {
 
             <Link to={`/pokemon/${pokemonName}`} className="cursor-pointer hover:transition-all animate__animated animate__backInLeft">
 
-                <div className="rounded shadow-white shadow-md bg-red-500 hover:bg-red-600 w-full flex justify-center items-center gap-4 md:gap-2  sm:gap-1 p-4 md:px-5 md:m-auto m-auto">
+                <div className="rounded shadow-white shadow-md bg-red-500 hover:bg-red-600 w-full flex sm:flex-col justify-center items-center gap-4 md:gap-2  sm:gap-1 md:px-4 p-4 md:px-5 md:m-auto m-auto">
                         
                     {/* <img src={getPokemonImage}  alt="specie pic" className="w-2/4  md:w-2/5" /> */}
-                    <img src={getPokemonImage} loading="lazy" alt="specie pic" className=" md:w-2/4 md:m-auto" />
+                    <img src={getPokemonImage} loading="lazy" alt="specie pic" className="md:m-auto" />
 
-                    <h1 className="md:text-sm md:m-auto text-base1 font-medium tracking-tight text-white capitalize">{ pokemonDetails.name}</h1>
+                    <h1 className="md:text-sm text-base1 md:mr-5 font-medium tracking-tight text-white capitalize">{ pokemonDetails.name}</h1>
 
                 </div>
 
