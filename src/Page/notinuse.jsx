@@ -4,6 +4,7 @@
 // search input component 
 // import SearchPokemon from "../Components/SearchPokemon";
 
+
 // importation of spinner 
 // import { PropagateLoader } from "react-spinners";
 
@@ -76,7 +77,6 @@
                         //  }
 
                     }
-
                 // </main>
 
             // </div>

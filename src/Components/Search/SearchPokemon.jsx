@@ -42,7 +42,7 @@ const SearchPokemon = ({ pokemons }) => {
 
         // check to see if the type word exit 
         const wordPresent = newSearch.some(data => data.name);  
-        
+       
         // if searchWord is less 3 return an empty array meaning 3 isnt part 3 is the expected word type to begin the search
         if (searchWord.length < 3) {
 
@@ -98,7 +98,7 @@ const SearchPokemon = ({ pokemons }) => {
             <div className="mt-8">
 
                 {
-                // { checking to see if the length filteredData isnt empty, if it isnt it will show the search result component else it show the card component */}
+                  // { checking to see if the length filteredData isnt empty, if it isnt it will show the search result component else it show the card component */}
                     (filteredData.length !== 0 ) ?
                         
                         (<>
@@ -107,6 +107,8 @@ const SearchPokemon = ({ pokemons }) => {
                             
                             <div className="flex gap-6 w-11/12 mt-15 mx-auto justify-center">
                             
+                {
+                
                                 {
                                     filteredData.map((value, index) => (
 
