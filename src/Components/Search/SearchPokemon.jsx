@@ -25,6 +25,7 @@ const SearchPokemon = ({ pokemons }) => {
     // pokemon data for the search
     const pokemon = pokemons.pokemonRecord.results;
 
+    // handle search function for performing of search query 
     const handleSearchFilter = (text) => {
 
         // grabbing the input value 
@@ -119,32 +120,32 @@ const SearchPokemon = ({ pokemons }) => {
                                 }
 
                             </div>
-                            
                         </>           
                     ) : (
                     <>
-                                {
-                                    // if error show the error message or show the loader or the data depending on the condition met
-                                    pokemons.error ? (<h2>Oops sorry something just went wrong</h2>) : (pokemons.loading)? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50} />) :
+                        {
+                            // if error show the error message or show the loader or the data depending on the condition met
+                            (pokemons.error) ? (<h2>Oops sorry something just went wrong</h2>) : (pokemons.loading) ? (<PropagateLoader color="#b91c1c" cssOverride={override} size={50} />) :
                                         
-                                        (<>
-                                        <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">
+                                (<>
+                                    <div className="grid grid-rows-4 grid-cols-4 gap-4 md:grid-rows-5 md:grid-cols-3">
 
-                                            {/* looping through the pokemon data  */}
-                                            {pokemon?.map((data, index) => {
+                                        {/* looping through the pokemon data  */}
+                                        {pokemon?.map((data, index) => {
 
-                                                // data passed down to card component as props
-                                                return (<Card pokemonDetails={data} key={index} />)
+                                            // data passed down to card component as props
+                                            return (<Card pokemonDetails={data} key={index} />)
                             
-                                            })}
+                                        })}
 
-                                        </div>
+                                    </div>
                                             
-                                            {/* // Pagination component  which contains the button for next and previous
-                                            //nextData and prevData passed down to Pagination as props       */}
-                                            <Pagination nextPage={pokemons.pokemonRecord.next} prevPage={pokemons.pokemonRecord.previous} />  
-                                        </>)
-                                }        
+                                    {/* // Pagination component  which contains the button for next and previous
+                                    //nextData and prevData passed down to Pagination as props       */}
+                                    <Pagination nextPage={pokemons.pokemonRecord.next} prevPage={pokemons.pokemonRecord.previous} />  
+                                            
+                                </>)
+                            }        
                     </>)            
                             
                 }
