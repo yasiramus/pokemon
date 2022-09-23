@@ -108,8 +108,6 @@ const SearchPokemon = ({ pokemons }) => {
                             
                             <div className="flex gap-6 w-11/12 mt-15 mx-auto justify-center">
                             
-                {
-                
                                 {
                                     // mapping through the filtered data to return the needed data 
                                     filteredData.map((value, index) => (
@@ -122,7 +120,7 @@ const SearchPokemon = ({ pokemons }) => {
 
                             </div>
                             
-                         </>           
+                        </>           
                     ) : (
                     <>
                                 {
