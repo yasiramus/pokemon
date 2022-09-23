@@ -30,6 +30,8 @@
   >At the pagination i called the fetchPokemon which contains the api call and passed the prop to it so when a button is clicke it shows the next data
   the button of the provious will only show when it has data I implement in this format because i thought it best the show the previous button only when it has data to avoid users from clicking on it when it has no data
 
+  > Search functionality 
+
 </P>
 
 ## Stacks Used
@@ -43,7 +45,7 @@
  * react-spinners : for displaying of the loading spinner
 
 
-### ✨ [Demo](http://pokemon-eta-black.vercel.app/)
+### ✨ [Demo](https://pokemon-mvtz87z1k-yasiramus.vercel.app/)
 
 ## Available Scripts
 <p>In the project directory, you can run:</p>
